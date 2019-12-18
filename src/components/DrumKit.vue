@@ -2,7 +2,7 @@
   <div class="container">
     <button
      v-shortkey="['a']" @shortkey="(soundOff('https://www.kozco.com/tech/piano2.wav'))"
-     v-bind:class="{selectedButton}"
+     v-bind:class="selectedButton"
      class="first"
      >
       <span>A</span>
@@ -10,7 +10,7 @@
     </button>
     <button 
      v-shortkey="['b']" @shortkey="soundOff('https://www.kozco.com/tech/LRMonoPhase4.wav')"
-     v-bind:class="{selectedButton}"
+     v-bind:class="selectedButton"
      @click="removeClass"
      class="second"
     >
@@ -19,7 +19,7 @@
     </button>
     <button 
     v-shortkey="['c']" @shortkey="soundOff('https://www.pacdv.com/sounds/people_sound_effects/applause-1.wav')"
-    v-bind:class="{selectedButton}"
+    v-bind:class="selectedButton"
     class="third"
     >
       <span>C</span>
@@ -27,7 +27,7 @@
     </button>
     <button 
     v-shortkey="['d']" @shortkey="soundOff('https://www.pacdv.com/sounds/people_sound_effects/applause-1.wav')"
-    v-bind:class="{selectedButton}"
+    v-bind:class="selectedButton"
     class="fourth"
     >
       <span>D</span>
@@ -44,13 +44,15 @@ export default {
   },
 data: function (){
   return{
-    isActive: true,
+    isActive: false,
   }
 },
 computed: {
   selectedButton: function () {
     return {
-      active: this.isActive 
+      selectedButton: this.isActive 
+      //an object is always truthy (because it exist)
+      //now using the return value of selected button 
     }
   }
   },
@@ -59,7 +61,8 @@ computed: {
       alert("Ham Spamwhich")
       var audio = new Audio(sound);
       audio.play();
-      this.set(this.isActive,!this.isAcvtive)//get vue.se t to work bc/ this is active is not updating (toggling between true and false) in Dom 
+      this.isActive = !this.isActive
+      // this.$set(this.isActive,false,this.isAcvtive) //only used with arrays and dictionaries () 
       }
       //after clicking a button toggling the style back
     }   

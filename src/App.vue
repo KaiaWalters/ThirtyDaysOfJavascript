@@ -11,7 +11,19 @@ export default {
   name: 'app',
   components: {
     DrumKit
-  }
+  },
+//   data: function (){
+//   return{
+//     isActive: true,
+//   }
+// },
+// computed: {
+//   selectedButton: function () {
+//     return {
+//       active: this.isActive 
+//     }
+//   }
+//   },
 }
 </script>
 
