@@ -1,33 +1,34 @@
 <template>
   <div class="container">
     <button
-     v-shortkey="['a']" @shortkey="(soundOff('https://www.kozco.com/tech/piano2.wav'))"
-     v-bind:class="selectedButton"
+     v-shortkey="['a']" @shortkey="(soundOff('https://www.kozco.com/tech/piano2.wav','a'))"
+     v-bind:class="selectedButtonA"
      class="first"
      >
       <span>A</span>
-      <span>CLAP</span>
+      <span>CLAP</span>s
     </button>
+
     <button 
-     v-shortkey="['b']" @shortkey="soundOff('https://www.kozco.com/tech/LRMonoPhase4.wav')"
-     v-bind:class="selectedButton"
-     @click="removeClass"
+     v-shortkey="['b']" @shortkey="soundOff('https://www.kozco.com/tech/LRMonoPhase4.wav', 'b')"
+     v-bind:class="selectedButtonA"
      class="second"
     >
       <span>B</span>
       <span>HIHAT</span>
     </button>
+
     <button 
-    v-shortkey="['c']" @shortkey="soundOff('https://www.pacdv.com/sounds/people_sound_effects/applause-1.wav')"
-    v-bind:class="selectedButton"
+    v-shortkey="['c']" @shortkey="soundOff('https://www.pacdv.com/sounds/people_sound_effects/applause-1.wav', 'c')"
+    v-bind:class="selectedButtonA"
     class="third"
     >
       <span>C</span>
       <span>KICK</span>
     </button>
     <button 
-    v-shortkey="['d']" @shortkey="soundOff('https://www.pacdv.com/sounds/people_sound_effects/applause-1.wav')"
-    v-bind:class="selectedButton"
+    v-shortkey="['d']" @shortkey="soundOff('https://www.pacdv.com/sounds/people_sound_effects/applause-1.wav', 'd')"
+    v-bind:class="selectedButtonA"
     class="fourth"
     >
       <span>D</span>
@@ -44,27 +45,41 @@ export default {
   },
 data: function (){
   return{
-    isActive: false,
+    isAActive: false,
+    isBActive: false,
+    isCActive: false, 
+    isDActive: false
   }
 },
 computed: {
   selectedButton: function () {
     return {
-      selectedButton: this.isActive 
+      selectedButtonA: this.isAActive,
+      selectedButtonB: this.isBActive, 
+      selectedButtonC: this.isCActive,
+      selectedButtonD: this.isDActive
       //an object is always truthy (because it exist)
       //now using the return value of selected button 
     }
   }
   },
   methods: { 
-     soundOff(sound){
+     soundOff(sound, key){
       alert("Ham Spamwhich")
       var audio = new Audio(sound);
       audio.play();
-      this.isActive = !this.isActive
-      // this.$set(this.isActive,false,this.isAcvtive) //only used with arrays and dictionaries () 
+      if(key === "a"){
+        this.isAActive = !this.isAActive
+      }else if(key === "b"){
+        this.isBActive = !this.isBActive
+      }else if(key === "c"){
+        this.isCActive = !this.isCActive
+      }else{
+        this.isDActive = !this.isDActive
       }
-      //after clicking a button toggling the style back
+      
+      }
+      //make is active true for a specific element not in general
     }   
   }
 
@@ -89,7 +104,7 @@ span{
   justify-content: center;
   align-items: center; 
 }
-.selectedButton{
+.selectedButtonA{
   border: 10px solid coral;
 }
 </style>
